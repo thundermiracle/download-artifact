@@ -1,6 +1,9 @@
-name: 'Download a Build Artifact'
+name: 'Download a Build Artifact which can be ignorable'
 description: 'Download a build artifact that was previously uploaded in the workflow by the upload-artifact action'
-author: 'GitHub'
+branding:
+  icon: activity
+  color: gray-dark
+author: 'ThunderMiracle'
 inputs: 
   name:
     description: 'Artifact name'
