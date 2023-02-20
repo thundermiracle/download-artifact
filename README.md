@@ -4,13 +4,19 @@ This downloads artifacts from your build
 
 See also [upload-artifact](https://github.com/actions/upload-artifact).
 
+# What's the difference from the original one?
+
+Option `if-no-artifact` is added. If you don't want to fail the job, just set `if-no-artifact: ignore`.
+
+I created PR https://github.com/thundermiracle/download-artifact/pull/205 but no response there, so I decided to release my own one.
+
 # What's new
 
 - Download all artifacts at once
 - Output parameter for the download path
 - Port entire action to typescript from a runner plugin so it is easier to collaborate and accept contributions
 
-Refer [here](https://github.com/actions/download-artifact/tree/v2) for the previous version
+Refer [here](https://github.com/thundermiracle/download-artifact/tree/v2) for the previous version
 
 # Usage
 
@@ -23,7 +29,7 @@ Basic (download to the current working directory):
 steps:
 - uses: actions/checkout@v3
 
-- uses: actions/download-artifact@v3
+- uses: thundermiracle/download-artifact@v3
   with:
     name: my-artifact
     
@@ -36,7 +42,7 @@ Download to a specific directory:
 steps:
 - uses: actions/checkout@v3
 
-- uses: actions/download-artifact@v3
+- uses: thundermiracle/download-artifact@v3
   with:
     name: my-artifact
     path: path/to/artifact
@@ -48,10 +54,19 @@ steps:
 
 Basic tilde expansion is supported for the `path` input:
 ```yaml
-  - uses: actions/download-artifact@v3
+  - uses: thundermiracle/download-artifact@v3
     with:
       name: my-artifact
       path: ~/download/path
+```
+
+Ignore if artifact name is not found:
+```yaml
+  - uses: thundermiracle/download-artifact@v3
+    with:
+      name: artifact-not-exist
+      path: ~/download/path
+      if-no-artifact: ignore # Can be 'fail', 'warn', 'ignore'
 ```
 
 ## Compatibility between `v1` and `v2`/`v3`
@@ -71,7 +86,7 @@ With `v2` and `v3`, when an artifact is specified by the `name` input, there is 
 
 To maintain the same behavior for `v2` and `v3`, you can set the `path` to the name of the artifact so an extra directory gets created.
 ```
-- uses: actions/download-artifact@v2
+- uses: thundermiracle/download-artifact@v2
   with:
     name: my-artifact
     path: my-artifact
@@ -95,7 +110,7 @@ Download all artifacts to a specific directory
 steps:
 - uses: actions/checkout@v3
 
-- uses: actions/download-artifact@v3
+- uses: thundermiracle/download-artifact@v3
   with:
     path: path/to/artifacts
     
@@ -109,7 +124,7 @@ Download all artifacts to the current working directory
 steps:
 - uses: actions/checkout@v3
 
-- uses: actions/download-artifact@v3
+- uses: thundermiracle/download-artifact@v3
 
 - name: Display structure of downloaded files
   run: ls -R
@@ -123,7 +138,7 @@ The `download-path` step output contains information regarding where the artifac
 steps:
 - uses: actions/checkout@v3
 
-- uses: actions/download-artifact@v3
+- uses: thundermiracle/download-artifact@v3
   id: download
   with:
     name: 'my-artifact'
