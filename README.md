@@ -8,7 +8,7 @@ See also [upload-artifact](https://github.com/actions/upload-artifact).
 
 Option `if-no-artifact` is added. If you don't want to fail the job, just set `if-no-artifact: ignore`.
 
-I created PR https://github.com/thundermiracle/download-artifact/pull/205 but no response there, so I decided to release my own one.
+I created PR https://github.com/actions/download-artifact/pull/205 but no response there, so I decided to release my own one.
 
 # What's new
 
